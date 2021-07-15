@@ -42,6 +42,9 @@ jobs:
     
     - name: Copying /source/dist/portfolio-app content to root
       run: cp -R ${{ github.workspace }}/master/source/dist/portfolio-app/* ${{ github.workspace }}/master
+    
+    - name: Copying index.html contents into 404.html
+      run: cp -R ${{ github.workspace }}/master/index.html ${{ github.workspace }}/master/404.html
       
     - name: Commit files
       run: |
