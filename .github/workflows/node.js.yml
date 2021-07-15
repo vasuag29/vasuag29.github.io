@@ -28,12 +28,12 @@ jobs:
         path: master
     
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v2.2.0
       with:
         node-version: ${{ matrix.node-version }}
-        #cache: 'npm'
+        cache: 'npm'
         
-    - name: Build angular app
+    - name: Build angular application
       run: |
         cd ${{ github.workspace }}/master/source
         npm ci
