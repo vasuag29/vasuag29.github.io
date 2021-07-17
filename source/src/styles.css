@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    color: azure;
+    color: black;
     margin: 0;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    background-image: url("/assets/space2_cropped.jpg");
+    background-image: url("/assets/cloudy_sky.jpg");
     background-size: cover;
+    display: inline-block;
 }
