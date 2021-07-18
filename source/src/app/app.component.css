@@ -76,7 +76,7 @@ h4 {
 
 /* --------------------------------------About section-----------------------------------------*/
 #about {
-    margin-bottom: 3%;
+    margin-bottom: 4%;
 }
 
 .img-fluid {
@@ -145,14 +145,28 @@ h4 {
     padding: 3% auto;
 }
 
+.scroll-to-top-button {    
+    padding: 1%;
+    margin-right: 3%;
+    font-size: 2.7rem;
+    text-align: right;
+}
+
+.scroll-to-top-icon {
+    color: #dd5506d0;
+}
+
+.scroll-to-top-icon :hover {
+    color: skyblue;
+}
+
 .contact-form{
     margin: 2% auto;
-    width: 50%;
+    width: 30%;
     height: 70%;
 }
 
 .contact-title-primary{
-    margin: auto auto 1%;
     font-family: 'Dawning of a New Day', cursive;
     font-weight: bold;
     font-size: 6rem;
@@ -167,12 +181,50 @@ h4 {
 
 /* .btnEmail, .btnName{
     width: 50%;
+    text-align: right;
 } */
 
 .contact-message {
     height: 18rem;
+    width: 135%;
 }
 
 .contact-submit {
     margin-top: 33%;
+}
+
+.scroll-to-top-icon :hover{
+    animation-name: spin;
+    animation-duration: 250ms;
+    animation-iteration-count: 1;
+    animation-timing-function: linear; 
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+/* --------------------------------------Footer section-----------------------------------------*/
+.socials {
+    background-color: #343A40;
+    padding: 2.5% 4%;
+}
+
+.social-icon {
+    margin: 20px 20px auto;
+    color: azure;
+    font-size: 1.65rem;
+  }
+
+.social-icon :hover {
+    color: skyblue;
+}
+
+.footer-reference {
+    margin-top: 1.5%;
 }
