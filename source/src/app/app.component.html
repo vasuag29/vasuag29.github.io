@@ -2,7 +2,7 @@
 <!-- Nav bar -->
 <section id="title">
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <!-- <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -10,7 +10,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="#about">About</a>
             </li>
@@ -54,7 +54,11 @@
 <section id="about">
   <div class="container-fluid">
     <div class="row about-content">
-      <div class="col-lg-6 profile-image"><img class="img-fluid" src="../assets/me_cropped.jpg" alt="Vasu Agarwal">
+      <div class="col-lg-6"><img class="img-fluid profile-image" src="../assets/me_cropped.jpg" alt="Vasu Agarwal">
+      <div>
+        <div class="about-name">Vasu Agarwal</div>
+        <div class="about-location"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<span>Bangalore, India</span></div>        
+      </div>
       </div>
       <div class="col-lg-6 ">
         <p class="about-text">
@@ -90,7 +94,7 @@
 <!------------------------------------------------------ Work section start ----------------------------------------------------->
 <section id="work">
   <div class="container-fluid">
-    <h2 class="work-title">Projects.</h2>
+    <h2 class="work-title">My finest creation.</h2>
 
     <div class="row projects">
 
@@ -174,58 +178,70 @@
 
 <!------------------------------------------------------ Contact section start -------------------------------------------------->
 <section id="contact">
-  <div container-fluid>
-    <h2 class="contact-title-primary">Hit me up.</h2>
+  <div class="container contact-content">
+    <h2 class="contact-title-primary">Get in touch.</h2>
     <h3 class="contact-title-secondary">I'll buy the coffee :)</h3>
 
     <form class="contact-form">
       <div class="row">
         <div class="col-md-6">
           <div class="mb-3 btnName">
-            <input type="text" class="form-control" placeholder="Name *" id="exampleInputPassword1">
+            <input type="text" class="form-control" placeholder="Name*" id="user-name">
           </div>
+        </div>
+          <div class="col-md-6">
           <div class="mb-3 btnEmail">
-            <input type="email" class="form-control" placeholder="Email address *">
+            <input type="email" class="form-control" placeholder="Email address*" id="user-email">
+          </div>
+        </div>
+      
+    </div>
+        
+          <div class="mb-3">
+            <textarea name="txtMsg" maxlength="500" class="form-control contact-message" placeholder="Your message*"></textarea>
           </div>
           <div class="contact-submit">
-            <button type="submit" class="btn btn-dark"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Send
+            <button type="submit" class="btn btn-outline-secondary"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;&nbsp;Send
               note</button>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="mb-3">
-            <textarea name="txtMsg" class="form-control contact-message" placeholder="Your message *"></textarea>
-          </div>
-        </div>
-      </div>
+        
+      
     </form>
-
-    <div class="scroll-to-top-button">
-      <a href="#title" class="scroll-to-top-icon">
-        <i class="fas fa-arrow-circle-up"></i>
-      </a>
-    </div>
-
   </div>
+
+  <div class="scroll-to-top-button">
+    <a href="#title" class="scroll-to-top-icon">
+      <i class="fas fa-arrow-circle-up"></i>
+    </a>
+  </div>
+
 </section>
 <!-- contact section end -->
+
 
 <!------------------------------------------------------ Footer section start --------------------------------------------------->
 <section id="footer">
   <footer class="socials">
     <div class="container-fluid">
-      <a class="social-icon" href="mailto:vasu2995@gmail.com" target="_blank" rel="noopener noreferrer"><i
-          class="fas fa-envelope"></i></a>
-      <a class="social-icon" href="https://www.linkedin.com/in/vasuagarwal29/" target="_blank"
-        rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-      <a class="social-icon" href="https://github.com/vasuag29" target="_blank" rel="noopener noreferrer"><i
-          class="fab fa-github"></i></a>
-      <a class="social-icon" href="https://www.instagram.com/ag_vasu_/" target="_blank" rel="noopener noreferrer"><i
-          class="fab fa-instagram"></i></a>
+      <a class="social-icon" href="mailto:vasu2995@gmail.com" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-envelope"></i></a>
+      <a class="social-icon" href="https://www.linkedin.com/in/vasuagarwal29/" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-linkedin-in"></i></a>
+      <a class="social-icon" href="https://github.com/vasuag29" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i></a>
+      <a class="social-icon" href="https://open.spotify.com/user/shinigamisama29" target="_blank"
+        rel="noopener noreferrer">
+        <i class="fab fa-spotify"></i></a>
+      <a class="social-icon" href="https://www.instagram.com/ag_vasu_/" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i></a>
     </div>
-    <p class="footer-reference">@ Vasu Agarwal</p>
+    
+    <div class="footer-quote">
+      <q>Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.</q>
+      <br>
+      <span class="footer-quote-writer">&HorizontalLine; Marcus Aurelius</span>
+    </div>
   </footer>
-</section>
-
-
-<router-outlet></router-outlet>
+  </section>
+  
+  <router-outlet></router-outlet>

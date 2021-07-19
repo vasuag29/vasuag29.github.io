@@ -9,12 +9,12 @@ export class AppComponent {
   title = 'portfolio-app';
   list = ['a software developer', 'a software engineer', 'a coder'];
 
-  aboutTextPara1 = "Born in India. An engineer with over 3 years of experience in designing, building and deploying software products. \
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \
-  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  aboutTextPara1 = "An engineer with over 3 years of experience in designing, building and deploying software products. \
+  I work as a software developer at Siemens Healthineers, mostly working on backend engineering stuff. \
+  I enjoy working on challenging research oriented ideas and thrive in a competitive environment. I'm open to software engineering opportunities, so hit me up!";
 
-  aboutTextPara2 = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \
-  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+  aboutTextPara2 = "I enjoy occasional competitive gaming and love reading manga.\
+  Get in touch if you'd like to have a conversation over coffee! ";
 
   // @Output() title_desc = '|';
   // ngOnInit() {
