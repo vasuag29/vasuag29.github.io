@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Question of the Heart 🐉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #2d1b69 0%, #5b247a 50%, #8b2e8f 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #f0e6d2;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 105, 180, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 20, 147, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: rgba(240, 230, 210, 0.5);
+            font-size: 1em;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.95) 0%, rgba(91, 36, 122, 0.95) 100%);
+            border: 2px solid #ff69b4;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(255, 105, 180, 0.1),
+                0 0 100px rgba(255, 105, 180, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: #ff69b4;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: #ffc0cb;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            color: #ffb6c1;
+            font-size: 1.5em;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        p {
+            color: #f0e6d2;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .quote {
+            font-style: italic;
+            color: #ffb6c1;
+            font-size: 1.1em;
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 3px solid #ff69b4;
+            background: rgba(255, 105, 180, 0.05);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: #ffffff;
+            border: 2px solid #ff69b4;
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.6);
+            background: linear-gradient(135deg, #ff1493 0%, #ff85c1 100%);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #9370db 0%, #ba55d3 100%);
+            border-color: #dda0dd;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #a278e0 0%, #c96dd8 100%);
+        }
+
+        /* Questionnaire */
+        .question-item {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(255, 105, 180, 0.08);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px;
+            border: 2px solid #ff69b4;
+            border-radius: 5px;
+            font-size: 1.1em;
+            margin: 15px 0;
+            outline: none;
+            background: rgba(45, 27, 105, 0.8);
+            color: #f0e6d2;
+            font-family: 'Crimson Text', serif;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        textarea {
+            max-width: 500px;
+            min-height: 120px;
+            resize: vertical;
+            text-align: left;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            border-color: #ff1493;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+
+        /* phot Quiz */
+        .photo-container {
+            margin: 30px 0;
+            background: rgba(255, 105, 180, 0.08);
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(255, 105, 180, 0.2));
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #ffb6c1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .quiz-option {
+            padding: 15px;
+            background: rgba(45, 27, 105, 0.8);
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 20, 147, 0.3);
+            border-color: #ff69b4;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 139, 0, 0.3);
+            border-color: #00ff00;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(139, 0, 0, 0.5);
+            border-color: #ff0000;
+        }
+
+        /* Tricky Button */
+        .question-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 80px;
+        }
+
+        #noBtn {
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+
+        /* Cute decorations */
+        .cute-icon {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 105, 180, 0.3);
+            border: 1px solid #ff69b4;
+        }
+
+        .progress-dot.active {
+            background: #ff69b4;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+
+        .user-photo {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 3px solid #ff69b4;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+        }
+
+        .user-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(255, 105, 180, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 1em;
+            color: #ffb6c1;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .photo-placeholder {
+                height: 200px;
+            }
+        }
+
+        /* Fire effect for final screen */
+        .fire-effect {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: 0;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(to top, #ff4500, #ffa500, transparent);
+            animation: flicker 1s ease-in-out infinite;
+            border-radius: 50% 50% 0 0;
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                transform: translateY(0) scaleY(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-10px) scaleY(1.2);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowflakes" id="snowContainer"></div>
+    
+    <div class="app-container">
+        <!-- Welcome Screen -->
+        <div id="screen1" class="screen active">
+            <div class="card">
+                <h1>A Tale of Two Hearts</h1>
+                <p class="quote">"Love is the death of duty... but what is honor compared to a woman's love?"</p>
+                <p>My dearest, a journey awaits you. Answer wisely, for the realm of our love depends upon it.</p>
+                <button class="btn" onclick="app.nextScreen(2)">Begin the Quest ⚔️</button>
+            </div>
+        </div>
+
+        <!-- Questionnaire Screen -->
+        <div id="screen2" class="screen">
+            <div class="card">
+                <div class="progress-indicator">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <h2>The Sacred Question</h2>
+                <p>Answer this question from the depths of your heart...</p>
+                
+                <div class="question-item">
+                    <h3>On a scale of 1-10, how much do you love me? ❤️</h3>
+                    <input type="number" id="q3" value="" oninput="app.resetToEleven('q3')" onchange="app.resetToEleven('q3')">
+                </div>
+
+                <button class="btn" onclick="app.validateQuestionnaire()">Continue the Journey 🗡️</button>
+            </div>
+        </div>
+
+        <!-- Photo Quiz Screen -->
+        <div id="screen3" class="screen">
+            <div class="card">
+                <div class="progress-indicator">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <h2>Memories of Our Realm</h2>
+                <p>Test your memory of our adventures together...</p>
+                
+                <div id="quizContainer"></div>
+                
+                <button class="btn" id="quizNextBtn" style="display: none;" onclick="app.nextQuizQuestion()">Next Memory 📜</button>
+                <button class="btn" id="quizCompleteBtn" style="display: none;" onclick="app.nextScreen(4)">Proceed to the Final Question ⚔️</button>
+            </div>
+        </div>
+
+        <!-- The Big Question (Tricky No Button) -->
+        <div id="screen4" class="screen">
+            <div class="card">
+                <div class="progress-indicator">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                </div>
+                <div class="cute-icon">💖💝💖</div>
+                <h1>The Ultimate Question</h1>
+                <h2 style="margin-top: 30px; font-size: 2.3em;">
+                    Will You Be My Valentine? 🌹
+                </h2>
+                
+                <!-- Add your photo here -->
+                <div class="user-photo">
+                    <!-- Replace 'my-photo.jpg' with your actual photo filename -->
+                    <!-- Example: <img src="my-photo.jpg" alt="Me"> -->
+                    <img src="/Simran/me_2.jpg" alt="pretty pleeeeaasee???">
+                </div>
+                
+                <div class="question-buttons">
+                    <button class="btn" onclick="app.finalYes()">YES! 💖</button>
+                    <button class="btn btn-secondary" id="noBtn" onmouseover="app.moveNoButton()" ontouchstart="app.moveNoButton()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="screen5" class="screen">
+            <div class="card">
+                <div class="fire-effect" id="fireContainer"></div>
+                <div class="cute-icon" style="font-size: 4em;">💑✨💕</div>
+                <h1>The Realm Rejoices!</h1>
+                <p class="quote">"And now my watch begins... watching over you, protecting your smile, and loving you every single day."</p>
+                <p style="font-size: 1.4em; color: #ff69b4; font-weight: 600; margin-top: 30px;">
+                    You have made me the happiest person in all the Seven Kingdoms! 
+                </p>
+                <p style="font-size: 1.2em; margin-top: 20px;">
+                    Our love story is better than any tale sung by bards. 
+                    I cannot wait to spend Valentine's Day with you, my queen! 👑
+                </p>
+                <div style="font-size: 2.5em; margin-top: 30px;">
+                    🌹 💕 ❤️ 💖 👑 ✨
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = {
+            currentScreen: 1,
+            currentQuizQuestion: 0,
+            quizAnswered: [],
+            
+            // CUSTOMIZE THESE QUIZ QUESTIONS WITH YOUR PHOTOS AND MEMORIES!
+            quizQuestions: [
+                {
+                    question: "Where did we take this photo together?",
+                    // To add your photo: Replace 'Add your photo here' with the path to your image
+                    // Example: photo: 'path/to/your/photo1.jpg'
+                    photo: '/Simran/1.JPG',
+                    options: [
+                        "Near the town after sunset in Half Moon Bay",
+                        "Outside that cozy alley in Carmel",
+                        "Outside the restaurant after our date night in Redwood City",
+                        "On our Arizona trip!!"
+                    ],
+                    correctIndex: 1 // Change this to the correct answer (0-3)
+                },
+                {
+                    question: "What was I wearing on this date?",
+                    photo: '/Simran/2.jpg',
+                    options: [
+                        "Your favorite brown jacket",
+                        "That red sweater I gave you",
+                        "Crisp white shirt with rolled sleeves",
+                        "Teri sirf mehroon chaddi"
+                    ],
+                    correctIndex: 3 // Change this to the correct answer (0-3)
+                },
+                {
+                    question: "What were we talking about when we took this photo?",
+                    photo: '/Simran/3.jpeg',
+                    type: 'text', // This question uses a text input
+                    correctAnswer: '' // Leave empty - any answer will be accepted
+                }
+            ],
+
+            init() {
+                this.createSnowfall();
+                this.loadQuiz();
+            },
+
+            nextScreen(screenNum) {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById(`screen${screenNum}`).classList.add('active');
+                this.currentScreen = screenNum;
+
+                if (screenNum === 5) {
+                    this.createFireEffect();
+                }
+            },
+
+            magicAnswer(inputId, value) {
+                const input = document.getElementById(inputId);
+                if (!input.dataset.magicApplied) {
+                    setTimeout(() => {
+                        input.value = value;
+                        input.dataset.magicApplied = 'true';
+                        input.style.transform = 'scale(1.1)';
+                        input.style.color = '#ffd700';
+                        setTimeout(() => {
+                            input.style.transform = 'scale(1)';
+                        }, 300);
+                    }, 100);
+                }
+            },
+
+            validateQuestionnaire() {
+                const q3 = document.getElementById('q3').value;
+
+                if (!q3) {
+                    alert('Please answer the question! ✨');
+                    return;
+                }
+
+                this.nextScreen(3);
+            },
+
+            loadQuiz() {
+                const container = document.getElementById('quizContainer');
+                if (this.currentQuizQuestion < this.quizQuestions.length) {
+                    const q = this.quizQuestions[this.currentQuizQuestion];
+                    
+                    let optionsHTML = '';
+                    if (q.type === 'text') {
+                        // Text input question
+                        optionsHTML = `
+                            <textarea id="textAnswer" placeholder="Share your thoughts..."></textarea>
+                            <button class="btn" onclick="app.submitTextAnswer()">Submit Answer 📝</button>
+                        `;
+                    } else {
+                        // Multiple choice question
+                        optionsHTML = `
+                            <div class="quiz-options" id="quizOptions">
+                                ${q.options.map((opt, idx) => `
+                                    <div class="quiz-option" onclick="app.checkAnswer(${idx})">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    container.innerHTML = `
+                        <div class="photo-container">
+                            <div class="photo-placeholder" id="photoPlaceholder${this.currentQuizQuestion}">
+                                ${q.photo !== 'Add your photo here' ? 
+                                    `<img src="${q.photo}" alt="Memory" id="quizImage${this.currentQuizQuestion}" onerror="app.handleImageError(this, '${q.photo}')">` : 
+                                    `<div style="text-align: center; padding: 20px;">
+                                        <div style="font-size: 4em; margin-bottom: 10px;">📸</div>
+                                        <div>Photo ${this.currentQuizQuestion + 1}</div>
+                                        <div style="font-size: 0.9em; margin-top: 10px; color: #c9a961;">
+                                            (Upload your photo by editing the code)
+                                        </div>
+                                    </div>`
+                                }
+                            </div>
+                            <h3>${q.question}</h3>
+                            ${optionsHTML}
+                        </div>
+                    `;
+                    
+                    // Handle HEIC conversion if needed
+                    if (q.photo !== 'Add your photo here' && q.photo.toLowerCase().endsWith('.heic')) {
+                        this.convertHeicImage(q.photo, `quizImage${this.currentQuizQuestion}`);
+                    }
+                }
+            },
+
+            async convertHeicImage(photoPath, imgElementId) {
+                try {
+                    const response = await fetch(photoPath);
+                    const blob = await response.blob();
+                    
+                    // Convert HEIC to JPEG
+                    const convertedBlob = await heic2any({
+                        blob: blob,
+                        toType: 'image/jpeg',
+                        quality: 0.9
+                    });
+                    
+                    // Create URL from converted blob
+                    const convertedUrl = URL.createObjectURL(convertedBlob);
+                    
+                    // Update image source
+                    const imgElement = document.getElementById(imgElementId);
+                    if (imgElement) {
+                        imgElement.src = convertedUrl;
+                    }
+                } catch (error) {
+                    console.error('Error converting HEIC image:', error);
+                    // Show error in placeholder if conversion fails
+                    const placeholder = document.getElementById('photoPlaceholder' + this.currentQuizQuestion);
+                    if (placeholder) {
+                        placeholder.innerHTML = `
+                            <div style="text-align: center; padding: 20px; color: #ff6b6b;">
+                                <div style="font-size: 2em; margin-bottom: 10px;">⚠️</div>
+                                <div>Could not load HEIC image</div>
+                                <div style="font-size: 0.9em; margin-top: 10px;">Try converting to JPG/PNG</div>
+                            </div>
+                        `;
+                    }
+                }
+            },
+
+            handleImageError(img, photoPath) {
+                // If image fails to load and it's a HEIC file, try to convert it
+                if (photoPath.toLowerCase().endsWith('.heic')) {
+                    const imgId = img.id;
+                    this.convertHeicImage(photoPath, imgId);
+                } else {
+                    // Show generic error for other formats
+                    img.parentElement.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #ff6b6b;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">⚠️</div>
+                            <div>Could not load image</div>
+                            <div style="font-size: 0.9em; margin-top: 10px;">Check file path</div>
+                        </div>
+                    `;
+                }
+            },
+
+            checkAnswer(selectedIndex) {
+                const q = this.quizQuestions[this.currentQuizQuestion];
+                const options = document.querySelectorAll('.quiz-option');
+                
+                options.forEach(opt => opt.style.pointerEvents = 'none');
+
+                if (selectedIndex === q.correctIndex) {
+                    options[selectedIndex].classList.add('correct');
+                    this.quizAnswered.push(true);
+                    
+                    setTimeout(() => {
+                        if (this.currentQuizQuestion < this.quizQuestions.length - 1) {
+                            document.getElementById('quizNextBtn').style.display = 'inline-block';
+                        } else {
+                            document.getElementById('quizCompleteBtn').style.display = 'inline-block';
+                        }
+                    }, 1000);
+                } else {
+                    options[selectedIndex].classList.add('wrong');
+                    setTimeout(() => {
+                        options[q.correctIndex].classList.add('correct');
+                        setTimeout(() => {
+                            if (this.currentQuizQuestion < this.quizQuestions.length - 1) {
+                                document.getElementById('quizNextBtn').style.display = 'inline-block';
+                            } else {
+                                document.getElementById('quizCompleteBtn').style.display = 'inline-block';
+                            }
+                        }, 1000);
+                    }, 500);
+                }
+            },
+
+            submitTextAnswer() {
+                const answer = document.getElementById('textAnswer').value.trim();
+                if (!answer) {
+                    alert('Please share your thoughts! 💭');
+                    return;
+                }
+                
+                // Accept any answer for text questions
+                this.quizAnswered.push(true);
+                
+                // Show success message
+                const textarea = document.getElementById('textAnswer');
+                textarea.style.borderColor = '#00ff00';
+                textarea.disabled = true;
+                
+                setTimeout(() => {
+                    if (this.currentQuizQuestion < this.quizQuestions.length - 1) {
+                        document.getElementById('quizNextBtn').style.display = 'inline-block';
+                    } else {
+                        document.getElementById('quizCompleteBtn').style.display = 'inline-block';
+                    }
+                }, 500);
+            },
+
+            resetToEleven(inputId) {
+                const input = document.getElementById(inputId);
+                setTimeout(() => {
+                    if (input.value != '69') {
+                        input.value = '69';
+                        input.style.transform = 'scale(1.1)';
+                        input.style.color = '#ffd700';
+                        setTimeout(() => {
+                            input.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                }, 100);
+            },
+
+            nextQuizQuestion() {
+                this.currentQuizQuestion++;
+                document.getElementById('quizNextBtn').style.display = 'none';
+                this.loadQuiz();
+            },
+
+            moveNoButton() {
+                const btn = document.getElementById('noBtn');
+                const container = document.querySelector('.question-buttons');
+                const containerRect = container.getBoundingClientRect();
+                
+                const maxX = window.innerWidth - btn.offsetWidth - 40;
+                const maxY = window.innerHeight - btn.offsetHeight - 40;
+                
+                let randomX = Math.random() * maxX;
+                let randomY = Math.random() * maxY;
+                
+                // Make sure it's not too close to the Yes button
+                const yesBtn = container.querySelector('.btn:not(#noBtn)');
+                const yesBtnRect = yesBtn.getBoundingClientRect();
+                
+                if (Math.abs(randomX - yesBtnRect.left) < 150 && 
+                    Math.abs(randomY - yesBtnRect.top) < 100) {
+                    randomX = randomX > window.innerWidth / 2 ? randomX + 200 : randomX - 200;
+                }
+                
+                btn.style.position = 'fixed';
+                btn.style.left = randomX + 'px';
+                btn.style.top = randomY + 'px';
+            },
+
+            finalYes() {
+                this.createDragonFire();
+                setTimeout(() => this.nextScreen(5), 1000);
+            },
+
+            createSnowfall() {
+                const container = document.getElementById('snowContainer');
+                const particles = ['❄️', '✨', '⭐', '💕', '💖', '🌟'];
+                
+                setInterval(() => {
+                    if (Math.random() > 0.7) {
+                        const flake = document.createElement('div');
+                        flake.className = 'snowflake';
+                        flake.textContent = particles[Math.floor(Math.random() * particles.length)];
+                        flake.style.left = Math.random() * 100 + '%';
+                        flake.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                        flake.style.fontSize = (Math.random() * 0.5 + 0.8) + 'em';
+                        container.appendChild(flake);
+                        
+                        setTimeout(() => flake.remove(), 7000);
+                    }
+                }, 200);
+            },
+
+            createDragonFire() {
+                const container = document.getElementById('snowContainer');
+                const loveParticles = ['💕', '💖', '💝', '💗', '✨', '🌟', '⭐'];
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        const particle = document.createElement('div');
+                        particle.textContent = loveParticles[Math.floor(Math.random() * loveParticles.length)];
+                        particle.className = 'snowflake';
+                        particle.style.left = (Math.random() * 100) + '%';
+                        particle.style.fontSize = (Math.random() * 2 + 1) + 'em';
+                        particle.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                        particle.style.color = '#ff69b4';
+                        container.appendChild(particle);
+                        
+                        setTimeout(() => particle.remove(), 3000);
+                    }, i * 30);
+                }
+            },
+
+            createFireEffect() {
+                const container = document.getElementById('fireContainer');
+                for (let i = 0; i < 30; i++) {
+                    const flame = document.createElement('div');
+                    flame.className = 'flame';
+                    flame.style.left = (i * 3.33) + '%';
+                    flame.style.animationDelay = (Math.random() * 0.5) + 's';
+                    flame.style.height = (Math.random() * 40 + 40) + 'px';
+                    container.appendChild(flame);
+                }
+            }
+        };
+
+        window.onload = () => app.init();
+    </script>
+</body>
+</html>
