@@ -1,0 +1,279 @@
+body {
+  color: black;
+  margin: 0;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* --------------------------------------Title section-----------------------------------------*/
+#title {
+  padding-bottom: 3.5%;
+  background-image: url("/assets/triangles1.svg");
+  background-size: cover;
+}
+
+.nav-item {
+  padding: 0 18px;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+}
+
+.title-container {
+  margin: 8% auto 10% auto;
+}
+
+h1 {
+  font-family: 'Dawning of a New Day', cursive;
+  font-size: 11rem;
+  padding-bottom: 6.25%;
+  color: rgb(46, 57, 59);
+}
+
+.title-description {
+  margin-bottom: 15%;
+  position: relative;
+}
+
+h4 {
+  font-family: 'Montserrat-Light', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 100;
+  color: rgb(54, 72, 78);
+}
+
+/* go down arrow */
+.down-arrow {
+  padding-top: 5%;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+/* set arrow positioning */
+.arrow {
+  width: 60px;
+  height: 82px;
+  position: absolute;
+  left: 49%;
+  margin-left: 0px;
+  bottom: 5%;
+  z-index: 999;
+}
+
+/* set arrow styles */
+.arrow path {
+  stroke: #dd5506d0;
+  stroke-width: 5px;
+  fill: transparent;
+  animation: down 2s infinite;
+}
+
+/* arrow keyframe animation */
+@keyframes down {
+  0% {
+    opacity: 0
+  }
+
+  25% {
+    opacity: 1
+  }
+
+  75% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+/* arrow animation delay */
+.arrow path.a1 {
+  animation-delay: -1s;
+}
+
+.arrow path.a2 {
+  animation-delay: -.5s;
+}
+
+.arrow path.a3 {
+  animation-delay: 0s;
+}
+
+/* --------------------------------------About section-----------------------------------------*/
+#about {
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  padding-bottom: 7%;
+}
+
+.img-fluid {
+  border-radius: 50%;
+}
+
+.profile-image {
+  margin: auto auto;
+  padding: 5% 5% 2%;
+  transform: scale(0.95);
+  display: block;
+  width: 50%;
+}
+
+.about-name {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.about-location {
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+.about-content {
+  padding: 2% 5% 2%;
+  color: rgb(46, 42, 42);
+}
+
+.about-text {
+  font-size: 1.7rem;
+  text-align: justify;
+  margin: 5% auto;
+}
+
+.resume-download {
+  color: rgb(46, 42, 42);
+  font-size: 1.7rem;
+  margin-bottom: 4%;
+}
+
+.resume-download-link {
+  color: #dd5506d0;
+  font-weight: bold;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+
+/* --------------------------------------Work section-----------------------------------------*/
+#work {
+  background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+  padding: 2% 5% 5%;
+}
+
+.projects {
+  padding-bottom: 2%;
+}
+
+.work-title {
+  margin: auto auto 3%;
+  font-family: 'Itim', cursive;
+  font-size: 6rem;
+  color: rgb(46, 42, 42);
+}
+
+.card {
+  margin: 5% auto;
+  padding: 10% auto;
+  width: 75%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+/* --------------------------------------Contact section-----------------------------------------*/
+#contact {
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  padding: 1% 2% 1%;
+}
+
+.contact-content {
+  padding: 0px 1% 1%;
+}
+
+.contact-title-primary {
+  font-family: 'Itim', cursive;
+  font-size: 6rem;
+  color: rgb(46, 42, 42);
+}
+
+.contact-title-secondary {
+  font-family: 'Itim', cursive;
+  font-size: 2.3rem;
+  color: rgb(124, 119, 119);
+}
+
+.contact-form {
+  position: relative;
+  margin: 2% auto;
+  padding-top: 2%;
+  width: 45%;
+  height: 25rem;
+  min-height: 150px;
+}
+
+.contact-message {
+  width: 100%;
+  height: 18rem;
+  background-color: white;
+}
+
+.contact-submit {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.scroll-to-top-button {
+  margin-right: 2%;
+  font-size: 2.7rem;
+  text-align: right;
+}
+
+.scroll-to-top-icon {
+  color: #d17945d0;
+}
+
+.scroll-to-top-icon :hover {
+  color: #c54800d0;
+}
+
+.element-spin :hover {
+  animation-name: spin;
+  animation-duration: 180ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------------------------Footer section-----------------------------------------*/
+.socials {
+  background-color: #343A40;
+  padding: 2.5% 4%;
+}
+
+.social-icon {
+  margin: 20px 20px auto;
+  color: azure;
+  font-size: 1.65rem;
+}
+
+.social-icon :hover {
+  color: skyblue;
+}
+
+.footer-quote {
+  color: azure;
+  margin-top: 1.5%;
+}
+
+.footer-quote-writer {
+  margin: auto 20% auto 20%;
+}
