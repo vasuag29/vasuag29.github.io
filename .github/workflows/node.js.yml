@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: ['lts/*']
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -33,20 +33,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
       #cache: 'npm'
         
-    - name: Build angular application
+    - name: Build website
       run: |
-        cd ${{ github.workspace }}/master/source
+        cd ${{ github.workspace }}/master/app
         npm ci
-        npm run build --if-present
-      # npm test
+        npm run build
 
-    - name: Clearing /docs folder
-      run: rm -R ${{ github.workspace }}/master/docs/*
-    
-    - name: Copying /source/dist/portfolio-app content to /docs
-      run: cp -R ${{ github.workspace }}/master/source/dist/portfolio-app/* ${{ github.workspace }}/master/docs
-    
-    - name: Copying index.html contents into 404.html
+    - name: SPA fallback (404.html)
       run: cp -R ${{ github.workspace }}/master/docs/index.html ${{ github.workspace }}/master/docs/404.html
       
     - name: Commit files

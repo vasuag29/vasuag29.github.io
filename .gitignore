@@ -9,6 +9,7 @@
 
 # dependencies
 /source/node_modules
+/app/node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -39,6 +40,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+
+# vite build output (we build into /docs for deploy)
+/app/dist
 
 # System Files
 .DS_Store
